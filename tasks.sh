@@ -2,8 +2,6 @@
 
 # Installing packages.
 echo "[ INFO ] Installing packages..."
-apt update
-apt upgrade -y
 apt-get clean
 apt install vim -y
 apt install screenfetch -y
