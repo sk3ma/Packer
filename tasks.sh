@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 # Installing packages.
-echo "[ INFO ] Installing packages..."
+echo "==> Installing packages..."
 apt-get clean
 apt install vim  \
     screenfetch  \
