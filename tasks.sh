@@ -3,7 +3,7 @@
 # Installing packages.
 echo "==> Installing packages..."
 apt-get clean
-apt install vim  \
+apt install -y vim  \
     screenfetch  \
     git  \
     net-tools  \
@@ -12,6 +12,6 @@ apt install vim  \
     sysstat  \
     unzip  \
     wget  \
-    curl -y
+    curl
 apt remove unattended-upgrades -y
 apt autoremove -y
