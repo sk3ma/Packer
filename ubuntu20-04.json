@@ -63,7 +63,7 @@
       "type": "shell",
       "inline": [
         "sleep 30",
-        "echo '[✗] Provisioning...' > /tmp/provision.log",
+        "echo '[✓] Provisioning...' > /tmp/provision.log",
         "apt update >> /tmp/provision.log 2>&1",
         "apt upgrade -y >> /tmp/provision.log 2>&1",
         "apt install open-vm-tools -y >> /tmp/provision.log 2>&1"
