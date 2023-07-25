@@ -10,7 +10,9 @@
       "ssh_port": "{{user `ssh_port`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
+      "ssh_timeout": "{{user `ssh_timeout`}}",
       "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "ssh_handshake_attempts": "{{user `ssh_handshake_attempts`}}",
       "ssh_pty": true,
       "ssh_handshake_attempts": "20",
       "shutdown_command": "echo 'ubuntu' | sudo -S shutdown -P now",
@@ -61,7 +63,7 @@
       "type": "shell",
       "inline": [
         "sleep 30",
-        "echo '[NOTICE] Provisioning...' > /tmp/provision.log",
+        "echo '[✗] Provisioning...' > /tmp/provision.log",
         "apt update >> /tmp/provision.log 2>&1",
         "apt upgrade -y >> /tmp/provision.log 2>&1",
         "apt install open-vm-tools -y >> /tmp/provision.log 2>&1"
@@ -88,6 +90,8 @@
         "ssh_port": "22",
         "ssh_username": "ubuntu",
         "ssh_password": "ubuntu",
-        "ssh_wait_timeout": "30m"
+        "ssh_timeout": "10m",
+        "ssh_wait_timeout": "20m",
+        "ssh_handshake_attempts": "50"
     }
 }
