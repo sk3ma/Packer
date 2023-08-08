@@ -1,0 +1,96 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "virtualbox_version_file": ".vbox_version",
+      "name": "{{user `name`}}",
+      "format": "{{user `format`}}",
+      "output_directory": "{{user `output_directory`}}",
+      "http_directory": "{{user `http_directory`}}",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "communicator": "{{user `communicator`}}",
+      "ssh_port": "{{user `ssh_port`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_timeout": "{{user `ssh_timeout`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "ssh_handshake_attempts": "{{user `ssh_handshake_attempts`}}",
+      "ssh_pty": true,
+      "boot_wait": "10s",
+      "boot_command": [
+         "<esc><wait>",
+         "<esc><wait>",
+         "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg",
+         "<enter><wait>",
+         "initrd /casper/initrd<enter><wait>",
+         "boot<enter>"
+      ],
+      "shutdown_command": "echo 'ubuntu' | sudo -S shutdown -P now",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "2048"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "1"
+        ]
+      ],
+      "vm_name": "ubuntu-20.04",
+      "guest_os_type": "ubuntu-64",
+      "disk_size": "10240",
+      "memory": "1024",
+      "headless": "{{ user `headless` }}"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 30",
+        "echo '[✓] Provisioning...' > /tmp/provision.log",
+        "apt update >> /tmp/provision.log 2>&1",
+        "apt upgrade -y >> /tmp/provision.log 2>&1",
+        "apt install open-vm-tools -y >> /tmp/provision.log 2>&1"
+      ]
+    },
+    {
+      "execute_command": "echo 'ubuntu' | sudo -S -E bash '{{ .Path }}'",
+      "type": "shell",
+      "scripts": [
+        "scripts/setup.sh",
+        "scripts/tasks.sh"
+      ]
+    }
+  ],
+  
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "virtualbox-iso/ubuntu_20-04-amd64.box"
+    }
+  ],
+  
+  "variables": {
+        "name": "virtualbox-template",
+        "format": "ova",
+        "headless": "true",
+        "http_directory": "http",
+        "output_directory": "virtualbox-iso",
+        "iso_checksum": "sha256:b8f31413336b9393ad5d8ef0282717b2ab19f007df2e9ed5196c13d8f9153c8b",
+        "iso_url": "https://releases.ubuntu.com/20.04.6/ubuntu-20.04.6-live-server-amd64.iso",
+        "communicator": "ssh",
+        "ssh_port": "22",
+        "ssh_username": "ubuntu",
+        "ssh_password": "ubuntu",
+        "ssh_timeout": "15m",
+        "ssh_wait_timeout": "20m",
+        "ssh_handshake_attempts": "50"
+    }
+}
