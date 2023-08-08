@@ -17,7 +17,7 @@
       "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
       "ssh_handshake_attempts": "{{user `ssh_handshake_attempts`}}",
       "ssh_pty": true,
-      "boot_wait": "10s",
+      "boot_wait": "{{ user `boot_wait` }}",
       "boot_command": [
          "<esc><wait>",
          "<esc><wait>",
@@ -41,7 +41,7 @@
           "1"
         ]
       ],
-      "vm_name": "ubuntu-20.04",
+      "vm_name": "{{user `vm_name`}}",
       "guest_os_type": "ubuntu-64",
       "disk_size": "10240",
       "memory": "1024",
@@ -91,6 +91,8 @@
         "ssh_password": "ubuntu",
         "ssh_timeout": "15m",
         "ssh_wait_timeout": "20m",
-        "ssh_handshake_attempts": "50"
+        "ssh_handshake_attempts": "50",
+        "boot_wait": "10s",
+        "vm_name": "ubuntu-20.04",
     }
 }
