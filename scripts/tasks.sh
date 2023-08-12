@@ -2,8 +2,8 @@
 
 # Installing packages.
 echo "==> Installing packages..."
-apt-get clean
-apt install -y vim  \
+sudo apt-get clean
+sudo apt install -y vim  \
     screenfetch     \
     git             \
     net-tools       \
@@ -13,5 +13,5 @@ apt install -y vim  \
     unzip           \
     wget            \
     curl
-apt remove unattended-upgrades -y
-apt autoremove -y
+sudo apt remove unattended-upgrades -y
+sudo apt autoremove -y
