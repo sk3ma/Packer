@@ -1,0 +1,31 @@
+---
+# cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: en
+    variant: us
+  network:
+    network:
+      version: 2
+      ethernets:
+        ens192:
+          dhcp4: true
+  storage:
+    layout:
+      name: lvm
+  identity:
+    hostname: ubuntu
+    username: ubuntu
+    password: ubuntu
+#    password: $6$V2cbIgq62/6505GC$8ITuDJrcpuPyDp4q7Wq7i6epq/vdJ0WPzPBVIxyOhxsPGIFgIO7gNigCVHHUnepnXg7DU9C/EFgIwJ.28YvaW0
+  ssh:
+    install-server: yes
+    allow-pw: true
+#    authorized-keys:
+  user-data:
+    disable_root: false
+  late-commands:
+    - sleep 60
+    - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
