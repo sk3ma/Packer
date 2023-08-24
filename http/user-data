@@ -23,7 +23,8 @@ autoinstall:
   ssh:
     install-server: yes
     allow-pw: true
-#    authorized-keys:
+#   authorized-keys: 
+#     - 
   user-data:
     disable_root: false
   late-commands:
