@@ -16,9 +16,9 @@ autoinstall:
     layout:
       name: lvm
   identity:
-    hostname: ubuntu
-    username: ubuntu
-    password: ubuntu
+    hostname: vagrant
+    username: vagrant
+    password: vagrant
 #    password: $6$V2cbIgq62/6505GC$8ITuDJrcpuPyDp4q7Wq7i6epq/vdJ0WPzPBVIxyOhxsPGIFgIO7gNigCVHHUnepnXg7DU9C/EFgIwJ.28YvaW0
   ssh:
     install-server: yes
@@ -29,4 +29,4 @@ autoinstall:
     disable_root: false
   late-commands:
     - sleep 60
-    - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
+    - echo 'vagrant ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/vagrant
