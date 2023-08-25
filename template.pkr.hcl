@@ -79,7 +79,6 @@ variable "provider" {
   default = "virtualbox"
 }
 
-
 variable "name" {
   type    = string
   default = "virtualbox-template"
