@@ -114,7 +114,6 @@ variable "floppy_label" {
   default = "cidata"
 }
 
-
 variable "output_directory" {
   type    = string
   default = "virtualbox-iso"
